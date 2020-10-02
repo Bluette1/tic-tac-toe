@@ -10,3 +10,115 @@ body {
   background-color: rgb(58, 82, 58);
   color: rgb(255, 255, 255);
 }
+
+::placeholder {
+  color: rgb(200, 200, 200);
+}
+
+.width-90 {
+  width: 90vw;
+}
+
+.height-90 {
+  height: 90vh;
+}
+
+.centered-horizontal {
+  margin: 20px auto;
+}
+
+.centers-h-v {
+  display: grid;
+  place-items: center;
+}
+
+.names-form {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 0 20px 20px 20px;
+  border-radius: 0.6rem;
+}
+.player-names-div {
+  margin-top: 20px;
+}
+.player-names-div label {
+  display: block;
+}
+.player-names-div input {
+  width: 100%;
+  outline: none;
+  border: 1px solid rgb(189, 199, 255);
+  background-color: transparent;
+  color: rgb(255, 255, 255);
+  border-radius: 0.2rem;
+  font-size: 1.2rem;
+  padding: 5px;
+}
+
+.primary-btn {
+  background-color: rgb(0, 0, 255);
+  color: rgb(255,255,255);
+  outline: none;
+  border: none;
+  border-radius: 0.2rem;
+  height: 30px;
+  cursor: pointer;
+}
+
+.primary-btn-outline {
+  background-color: transparent;
+  color: rgb(255,255,255);
+  outline: none;
+  border: 2px solid rgb(0, 0, 255);
+  border-radius: 0.2rem;
+  height: 30px;
+  cursor: pointer;
+}
+
+.primary-btn-outline:hover {
+  background-color: rgb(0, 0, 255);
+  color: rgb(255,255,255);
+  outline: none;
+  border: none;
+  border-radius: 0.2rem;
+  height: 30px;
+  cursor: pointer;
+}
+
+.options-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: fit-content;
+}
+
+.options-btns button {
+  margin: 10px;
+}
+
+.intro-section {
+  height: fit-content;
+  padding: 1rem;
+}
+
+.gamebord-section {
+  display: grid;
+  place-items: center;
+}
+
+.gamebord-container {
+  border: 1px solid rgb(189, 199, 255);
+  width: 30%;
+  height: 80%;
+  padding: 0;
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+}
+
+.gamebord-container div {
+  border: 3px solid rgb(255, 255, 255);
+}
+
+.hidden-element {
+  display: none;
+}

@@ -1,5 +1,3 @@
-alert('Hello there, from the alert function')
-
 // create  player factory
 const Player = (playerName = 'John', playerMark = 'X') => {
   const name = playerName;
