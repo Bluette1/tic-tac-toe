@@ -7,4 +7,6 @@ body {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
+  background-color: rgb(58, 82, 58);
+  color: rgb(255, 255, 255);
 }
