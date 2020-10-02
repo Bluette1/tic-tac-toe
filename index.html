@@ -11,10 +11,10 @@
         <h1 id="intro-header" class="intro-header">Welcome to Tic Tac Toe game</h1>
         <div id="options-div" class="options-div centers-h-v">
             <div class="options-btns">
-                <button type="button" id="start-game" class="primary-btn start-game-btn">Start a new game</button>
-                <button type="button" id="read-instructions-btn" class=" primary-btn read-instructions-btn">Read instructions</button>
+                <button type="button" id="start-game-btn" class="primary-btn start-game-btn">Start a new game</button>
+                <button type="button" id="read-instructions-btn" class="hidden-element primary-btn read-instructions-btn">Read instructions</button>
             </div>
-            <form id="names-form" class="names-form ">
+            <form id="names-form" class="names-form hidden-element">
                 <div class="player-names-div">
                     <label for="player-one-name" class="player-names-labels">What is the name of the first player? </label>
                     <input type="text" id="player-one-name" placeholder="Enter player one name here...">
@@ -29,7 +29,9 @@
             </form>
         </div>
     </section>
-    <section id="gamebord-section" class="gamebord-section width-90 height-90 centered-horizontal centers-h-v ">
+    <section
+        id="gamebord-section"
+        class="gamebord-section width-90 height-90 centered-horizontal centers-h-v hidden-element">
         <div class="gamebord-container">
             <div class="board-cell"></div>
             <div class="board-cell"></div>
@@ -42,6 +44,6 @@
             <div class="board-cell"></div>
         </div>
     </section>
-    <script type="text/javascript" src="./index.js"></script>
+    <script type="module" src="./javascript/index.js"></script>
 </body>
 </html>
