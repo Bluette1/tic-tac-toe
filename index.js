@@ -11,15 +11,19 @@ const Board = () => {
 
 
     const printBoard = () => {
-        return `| $ { board[0] } | $ { board[1] } | $ { board[2] } |
-                | ___ | ___ | ___ |
-                |
-                $ { board[3] } | $ { board[4] } | $ { board[5] } |
-                | ___ | ___ | ___ |
-                |
-                $ { board[6] } | $ { board[7] } | $ { board[8] } |
-                |     |     |     | `;
-    };
+        boardString = `
+             |${board[0]}|${board[1]}|${board[2]}|
+             |_|_|_|
+             |${board[3]}|${board[4]}|${board[5]}|
+             |_|_|_|
+             |${board[6]}|${board[7]}|${board[8]}|
+             |_|_|_| 
+             `;
+
+        return boardString;
+    }
+
+
 
     const checkValid = (posn) => {
         if (typeof posn === 'number') {
@@ -93,12 +97,6 @@ const Game = () => {
     let firstPlayer = null;
     let secondPlayer = null;
 
-
-    const players = (firstPlayer, secondPlayer) => {
-        firstPlayer = Player(firstPlayer, 'X');
-        secondPlayer = Player(secondPlayer, 'O');
-    };
-
     const changeSymbol = (firstPlayer, secondPlayer) => {
         firstPlayer = Player(firstPlayer, 'O');
         secondPlayer = Player(secondPlayer, 'X');
@@ -109,7 +107,7 @@ const Game = () => {
     };
 
     const printBoard = () => {
-        board.printBoard;
+        return board.printBoard();
     };
 
     const checkValid = (posn) => {
@@ -135,8 +133,10 @@ const Game = () => {
         turnCounter += 1;
     };
 
-    const playerInfo = () => `The players are ${first_player.name}(${first_player.mark}) and ${second_player.name}
-        "(${second_player.mark})`;
+    const playerInfo = () => `
+    The players are
+     ${ firstPlayer.name }(${ firstPlayer.mark }) and ${ secondPlayer.name }(${secondPlayer.mark})
+    `;
 
 
     const verifyUpdate = (posn) => {
@@ -150,15 +150,87 @@ const Game = () => {
 
         return true;
     };
-    return { turnCounter };
+    return {
+        turnCounter,
+        printBoard,
+        changeSymbol,
+
+        playerInfo,
+
+        set firstPlayer(player) {
+            firstPlayer = Player(player, 'X');
+            console.log('1st:::::::::::::::', firstPlayer);
+
+        },
+        set secondPlayer(player) {
+            secondPlayer = Player(player, 'O');
+
+            console.log('1st:::::::::::::::', secondPlayer);
+
+        }
+
+    };
 };
 
-console.log('Welcome to Tic Tac Toe!');
-// loop do# rubocop: todo Metrics / BlockLength
-let gameOn = true;
-while (gameOn) {
-    console.log("Would you like to play a game of tic tac toe? Please enter ' [y] es ' or ' [n] o '");
+const startGameBtn = document.querySelector('#start-game-btn');
+const playerDetailsForm = document.querySelector('#start-game-form');
+const submitPlayersBtn = document.querySelector('#submit-player-details');
+const firstPlayer = document.querySelector('#player-one-name');
+const secondPlayer = document.querySelector('#player-two-name');
+const changeSymbolsForm = document.querySelector('#change-player-mark');
+const submitMarksBtn = document.querySelector('#submit-marks-btn');
+const board = document.querySelector('#board');
+const playerInfo = document.querySelector('#player-info');
+
+const startGame = () => {
+    startGameBtn.addEventListener('click', () => {
+        playerDetailsForm.classList.remove('hidden');
+        startGameBtn.classList.add('hidden');
+    });
+
+    const game = Game();
+    submitPlayersBtn.addEventListener('click', () => {
+        const playerOne = firstPlayer.value;
+        const playerTwo = secondPlayer.value;
+        game.firstPlayer = playerOne;
+        game.secondPlayer = playerTwo;
+        playerInfo.textContent = game.playerInfo();
+
+        stringBoard = game.printBoard().split('\n');
+        stringBoard.forEach((line) => {
+            row = document.createElement('span');
+            row.textContent = line;
+            board.appendChild(row);
+
+        });
+
+
+        playerDetailsForm.classList.add('hidden');
+        changeSymbolsForm.classList.remove('hidden');
+
+        // if (!isNoErrors()) {
+        //     const myBook = new Book(title, pages, author, readStatus);
+        //     addBookToLibrary(myBook);
+        //     newBookForm.reset();
+        //     displayBooks();
+        // }
+    });
+
+    submitMarksBtn.addEventListener('click', () => {
+        const changeMarks = document.querySelector('input[name=change-symbols]:checked').value;
+        if (changeMarks) {
+            game.changeSymbol(playerOne, playerTwo);
+        }
+    });
 }
+
+startGame();
+// console.log('Welcome to Tic Tac Toe!');
+// // loop do# rubocop: todo Metrics / BlockLength
+// let gameOn = true;
+// while (gameOn) {
+//     console.log("Would you like to play a game of tic tac toe? Please enter ' [y] es ' or ' [n] o '");
+// }
 // puts "Would you like to play a game of tic tac toe? Please enter '[y]es' or '[n]o'"
 // play_game = gets.chomp[0].downcase
 // let playGame =

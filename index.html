@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <title>TicTacToe</title>
+</head>
+
+<body>
+    <section class="centered-h-v">
+        <h1 class="centered-text">Welcome to Tic Tac Toe!</h1>
+        <div>
+            <button type="button" class="rounded-corners custom-borders primary-btn" id="start-game-btn">Start the Game</button>
+        </div>
+        <form id="start-game-form" class="hidden">
+            <h3 class="centered-text">Enter the players' details:</h3>
+            <div class="player-details">
+                <label for="player-one-name">Name of the first player: </label>
+                <div class="player-one-details-input margin-bottom-20">
+                    <input class="rounded-corners custom-borders" type="text" name="player-one-name" id="player-one-name" placeholder="Player one name..." />
+                </div>
+                <label for="player-two-name">Name of the second player: </label>
+                <div class="player-two-details-input">
+                    <input class="rounded-corners custom-borders" type="text " name="player-two-name" id="player-two-name" placeholder="Player two name... " />
+                </div>
+            </div>
+            <div class="centered-h-v">
+                <button type="button" class="rounded-corners custom-borders primary-btn margin-top-20 " id="submit-player-details">
+                Submit</button>
+            </div>
+        </form>
+        <form id="change-player-mark" class="hidden">
+            <h3 class="centered-text" id='player-info'></h3>
+            <div class="margin-top-20">
+                <label class="padding-right-10">Do you want to change the symbols of players?</label>
+                <label for="change-symbols ">Yes</label>
+                <input class="rounded-corners custom-borders" type="radio" name="change-symbols" id="change-symbols " value="change-symbols">
+                <label for="keep-symbols ">No</label>
+                <input class="rounded-corners custom-borders" type="radio" name="change-symbols" id="keep-symbols" value="keep-symbols" checked>
+            </div>
+            <div class="centered-h-v">
+                <button type="button" class="rounded-corners custom-borders primary-btn margin-top-20 " id="submit-marks-btn">
+                    Submit</button>
+            </div>
+        </form>
+    </section>
+    <section>
+        <div class="board centered-h-v margin-top-20" id="board"></div>
+    </section>
+    <script type="text/javascript " src="./index.js "></script>
+</body>
+
+</html>
