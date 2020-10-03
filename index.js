@@ -97,11 +97,6 @@ const Game = () => {
     let firstPlayer = null;
     let secondPlayer = null;
 
-    const changeSymbol = (firstPlayer, secondPlayer) => {
-        firstPlayer = Player(firstPlayer, 'O');
-        secondPlayer = Player(secondPlayer, 'X');
-    };
-
     const updateBoard = (posn) => {
         board.updateBoard(posn, checkPlayer());
     };
@@ -153,22 +148,13 @@ const Game = () => {
     return {
         turnCounter,
         printBoard,
-        changeSymbol,
-
         playerInfo,
-
         set firstPlayer(player) {
-            firstPlayer = Player(player, 'X');
-            console.log('1st:::::::::::::::', firstPlayer);
-
+            firstPlayer = Player(player.name, player.mark);
         },
         set secondPlayer(player) {
-            secondPlayer = Player(player, 'O');
-
-            console.log('1st:::::::::::::::', secondPlayer);
-
+            secondPlayer = Player(player.name, player.mark);
         }
-
     };
 };
 
@@ -189,11 +175,13 @@ const startGame = () => {
     });
 
     const game = Game();
+    let playerOne = '';
+    let playerTwo = '';
     submitPlayersBtn.addEventListener('click', () => {
-        const playerOne = firstPlayer.value;
-        const playerTwo = secondPlayer.value;
-        game.firstPlayer = playerOne;
-        game.secondPlayer = playerTwo;
+        playerOne = firstPlayer.value;
+        playerTwo = secondPlayer.value;
+        game.firstPlayer = { name: playerOne, mark: 'X' };
+        game.secondPlayer = { name: playerTwo, mark: 'O' };
         playerInfo.textContent = game.playerInfo();
 
         stringBoard = game.printBoard().split('\n');
@@ -201,9 +189,7 @@ const startGame = () => {
             row = document.createElement('span');
             row.textContent = line;
             board.appendChild(row);
-
         });
-
 
         playerDetailsForm.classList.add('hidden');
         changeSymbolsForm.classList.remove('hidden');
@@ -219,7 +205,11 @@ const startGame = () => {
     submitMarksBtn.addEventListener('click', () => {
         const changeMarks = document.querySelector('input[name=change-symbols]:checked').value;
         if (changeMarks) {
-            game.changeSymbol(playerOne, playerTwo);
+            game.firstPlayer = { name: playerOne, mark: 'O' };
+            game.secondPlayer = { name: playerTwo, mark: 'X' };
+
+            playerInfo.textContent = game.playerInfo();
+            changeSymbolsForm.replaceWith(playerInfo);
         }
     });
 }
