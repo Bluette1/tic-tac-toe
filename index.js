@@ -6,8 +6,8 @@ const Player = (playerName = 'John', playerMark = 'X') => {
 };
 
 // create board factory
-const Board = () => {
-    const board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const Board = (array = [1, 2, 3, 4, 5, 6, 7, 8, 9]) => {
+    let board = array;
 
 
     const printBoard = () => {
@@ -24,6 +24,10 @@ const Board = () => {
     }
 
     const checkValid = (posn) => {
+        console.log('^^^^^^^^^^^^^^^^^^^^^^^^^')
+        console.log(board[posn - 1])
+        console.log('^^^^^^^^^^^^^^^^^^^^^^^^^')
+
         if (typeof board[posn - 1] === 'number') {
             return true;
         }
@@ -91,12 +95,15 @@ const Board = () => {
         checkWin,
         checkValid,
         updateBoard,
+        set board(array) {
+            board = array;
+        }
     };
 };
 
 // create  game factory
 const Game = () => {
-    const board = Board();
+    let board = Board([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     let turnCounter = 0;
     let firstPlayer = null;
     let secondPlayer = null;
@@ -135,10 +142,6 @@ const Game = () => {
         return false;
     };
 
-    // const turnIncrease = () => {
-    //     turnCounter += 1;
-    // };
-
     const playerInfo = () => `
     The players are
      ${firstPlayer.name}(${firstPlayer.mark}) and ${secondPlayer.name}(${secondPlayer.mark})
@@ -150,6 +153,8 @@ const Game = () => {
             return 'Please select another number between 1 and 9';
         }
         if (!checkValid(posn)) {
+            console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
+            console.log(board)
             return 'The chosen position is already taken.';
         }
         updateBoard(posn);
@@ -170,6 +175,10 @@ const Game = () => {
         },
         set secondPlayer(player) {
             secondPlayer = Player(player.name, player.mark);
+        },
+
+        set board(array) {
+            board = Board(array);
         },
         checkPlayer,
         verifyUpdate,
@@ -192,7 +201,9 @@ const choosePosnBtn = document.querySelector('#submit-position');
 const chosenPosn = document.querySelector('#position');
 const validationInfo = document.querySelector('#validation-info');
 const winnerInfo = document.querySelector('#winner-info');
-const playAgainBtn = document.querySelector('#play-again-btn')
+const playAgainBtn = document.querySelector('#play-again-btn');
+const topSection = document.querySelector('#top-section');
+let game = null;
 
 const displayBoard = (game) => {
     board.textContent = '';
@@ -218,12 +229,11 @@ const play = (game) => {
 
         if (verified === true) {
             validationInfo.classList.add('hidden');
-
-
             if (game.turnCounter >= 4 && game.checkWin()) {
                 winnerInfo.textContent = `There is a WINNER: ${game.checkPlayer().name}`;
                 winnerInfo.classList.remove('hidden');
                 playAgainBtn.classList.remove('hidden');
+
                 startGame();
             } else {
 
@@ -232,41 +242,46 @@ const play = (game) => {
                     winnerInfo.textContent = 'DRAW';
                     winnerInfo.classList.remove('hidden');
                     playAgainBtn.classList.remove('hidden');
+
+                    startGame();
                 } else {
                     play(game);
                 }
-
             }
-
         } else {
             validationInfo.textContent = verified;
             validationInfo.classList.remove('hidden');
         }
-
     });
-
-    // playAgainBtn.addEventListener('click', () => {
-    //     // reset board
-    //     startGame();
-
-    // });
 }
 
 const startGame = () => {
-    startGameBtn.addEventListener('click', () => {
+    startGameBtn.addEventListener('click', (evt) => {
+        evt.stopImmediatePropagation();
         playerDetailsForm.classList.remove('hidden');
         startGameBtn.classList.add('hidden');
     });
 
     playAgainBtn.addEventListener('click', () => {
-        playerDetailsForm.classList.remove('hidden');
+        playerDetailsForm.reset();
         playAgainBtn.classList.add('hidden');
+        startGameBtn.classList.remove('hidden');
+        board.textContent = '';
+        playerInfo.textContent = '';
+        turnInfo.textContent = '';
+        winnerInfo.textContent = '';
+        validationInfo.textContent = '';
+        choosePosnForm.classList.add('hidden');
     });
 
-    const game = Game();
+    game = Game();
+    game.board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let playerOne = '';
     let playerTwo = '';
-    submitPlayersBtn.addEventListener('click', () => {
+    submitPlayersBtn.addEventListener('click', (evt) => {
+        evt.stopImmediatePropagation();
+        evt.preventDefault();
+        // game = Game();
         playerOne = firstPlayer.value;
         playerTwo = secondPlayer.value;
         game.firstPlayer = { name: playerOne, mark: 'X' };
@@ -274,17 +289,21 @@ const startGame = () => {
         playerInfo.textContent = game.playerInfo();
 
         playerDetailsForm.classList.add('hidden');
+        changeSymbolsForm.reset();
         changeSymbolsForm.classList.remove('hidden');
     });
 
-    submitMarksBtn.addEventListener('click', () => {
+    submitMarksBtn.addEventListener('click', (evt) => {
+        evt.stopImmediatePropagation();
         const changeMarks = document.querySelector('input[name=change-symbols]:checked').value;
         if (changeMarks) {
             game.firstPlayer = { name: playerOne, mark: 'O' };
             game.secondPlayer = { name: playerTwo, mark: 'X' };
 
             playerInfo.textContent = game.playerInfo();
-            changeSymbolsForm.replaceWith(playerInfo);
+            topSection.appendChild(playerInfo);
+            // changeSymbolsForm.replaceWith(playerInfo);
+            changeSymbolsForm.classList.add('hidden')
             play(game);
         }
     });
