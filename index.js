@@ -24,10 +24,6 @@ const Board = (array = [1, 2, 3, 4, 5, 6, 7, 8, 9]) => {
     }
 
     const checkValid = (posn) => {
-        console.log('^^^^^^^^^^^^^^^^^^^^^^^^^')
-        console.log(board[posn - 1])
-        console.log('^^^^^^^^^^^^^^^^^^^^^^^^^')
-
         if (typeof board[posn - 1] === 'number') {
             return true;
         }
@@ -109,7 +105,6 @@ const Game = () => {
     let secondPlayer = null;
 
     const updateBoard = (posn) => {
-        console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRr', checkPlayer().symbol)
         board.updateBoard(posn, checkPlayer().symbol);
     };
 
@@ -121,7 +116,6 @@ const Game = () => {
         return board.checkValid(posn);
     };
     const checkPlayer = () => {
-        console.log('here############', turnCounter)
         if (turnCounter % 2 === 0) {
             name = firstPlayer.name;
             symbol = firstPlayer.mark;
@@ -153,8 +147,6 @@ const Game = () => {
             return 'Please select another number between 1 and 9';
         }
         if (!checkValid(posn)) {
-            console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO')
-            console.log(board)
             return 'The chosen position is already taken.';
         }
         updateBoard(posn);
@@ -235,7 +227,7 @@ const play = (game) => {
                 winnerInfo.classList.remove('hidden');
                 playAgainBtn.classList.remove('hidden');
                 game.board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
+                game.turnCounter = 0;
                 startGame();
             } else {
 
@@ -244,7 +236,8 @@ const play = (game) => {
                     winnerInfo.textContent = 'DRAW';
                     winnerInfo.classList.remove('hidden');
                     playAgainBtn.classList.remove('hidden');
-                    game.board = [1, 2, 3, 4, 5, 6, 7, 9];
+                    game.board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+                    game.turnCounter = 0;
                     startGame();
                 } else {
                     play(game);
@@ -277,7 +270,6 @@ const startGame = () => {
     });
 
     game = Game();
-    // game.board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let playerOne = '';
     let playerTwo = '';
     submitPlayersBtn.addEventListener('click', (evt) => {
