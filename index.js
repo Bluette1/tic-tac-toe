@@ -23,10 +23,8 @@ const Board = () => {
         return boardString;
     }
 
-
-
     const checkValid = (posn) => {
-        if (typeof posn === 'number') {
+        if (typeof board[posn - 1] === 'number') {
             return true;
         }
         return false;
@@ -37,20 +35,24 @@ const Board = () => {
     };
 
     const checkRows = (grid) => {
+        let win = undefined;
         grid.forEach((row) => {
             if (row[0] === row[1] && row[1] === row[2]) {
-                return row[0];
+                win = row[0];
             }
         });
+        return win;
     };
 
-    const checkColumns = (grid) => {
+    const checkColumns = () => {
         transposedGrid = [
             [board[0], board[3], board[6]],
             [board[1], board[4], board[7]],
             [board[2], board[5], board[8]],
         ];
-        return checkRows(diagonals);
+        if (checkRows(transposedGrid)) {
+            return checkRows(transposedGrid);
+        }
     };
 
     const checkDiagonals = () => {
@@ -58,14 +60,16 @@ const Board = () => {
             [board[0], board[4], board[8]],
             [board[2], board[4], board[6]],
         ];
-        return checkRows(diagonals);
+        if (checkRows(diagonals)) {
+            return checkRows(diagonals);
+        };
     };
 
     const checkWin = () => {
         grid = [
             [board[0], board[1], board[2]],
             [board[3], board[4], board[5]],
-            [board[6], board[7], board[8]],
+            [board[6], board[7], board[8]]
         ];
 
         // check the rows
@@ -73,12 +77,12 @@ const Board = () => {
             return checkRows(grid);
         }
         // check the columns
-        if (checkColumns(grid)) {
-            return checkColumns(grid);
+        if (checkColumns()) {
+            return checkColumns();
         }
         // check the diagonals
-        if (checkDiagonals(grid)) {
-            return checkDiagonals(grid);
+        if (checkDiagonals()) {
+            return checkDiagonals();
         }
     };
 
@@ -98,7 +102,8 @@ const Game = () => {
     let secondPlayer = null;
 
     const updateBoard = (posn) => {
-        board.updateBoard(posn, checkPlayer());
+        console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRr', checkPlayer().symbol)
+        board.updateBoard(posn, checkPlayer().symbol);
     };
 
     const printBoard = () => {
@@ -106,47 +111,58 @@ const Game = () => {
     };
 
     const checkValid = (posn) => {
-        board.checkValid(posn);
+        return board.checkValid(posn);
     };
     const checkPlayer = () => {
+        console.log('here############', turnCounter)
         if (turnCounter % 2 === 0) {
-            player = firstPlayer.name;
+            name = firstPlayer.name;
+            symbol = firstPlayer.mark;
         } else {
-            player = secondPlayer.name;
+            name = secondPlayer.name;
+            symbol = secondPlayer.mark;
         }
-        return player;
+        return {
+            name,
+            symbol
+        };
     };
 
     const checkWin = () => {
-        if (board.checkWin) {
+        if (board.checkWin()) {
             return true;
         }
         return false;
     };
 
-    const turnIncrease = () => {
-        turnCounter += 1;
-    };
+    // const turnIncrease = () => {
+    //     turnCounter += 1;
+    // };
 
     const playerInfo = () => `
     The players are
-     ${ firstPlayer.name }(${ firstPlayer.mark }) and ${ secondPlayer.name }(${secondPlayer.mark})
+     ${firstPlayer.name}(${firstPlayer.mark}) and ${secondPlayer.name}(${secondPlayer.mark})
     `;
 
-
     const verifyUpdate = (posn) => {
-        if (![0, 1, 2, 3, 4, 5, 6, 7, 8, 9].includes(posn)) {
+        posn = parseInt(posn);
+        if (![1, 2, 3, 4, 5, 6, 7, 8, 9].includes(posn)) {
             return 'Please select another number between 1 and 9';
         }
-        if (!check_valid(posn)) {
-            return 'Chosen number is used before';
+        if (!checkValid(posn)) {
+            return 'The chosen position is already taken.';
         }
         updateBoard(posn);
 
         return true;
     };
     return {
-        turnCounter,
+        get turnCounter() {
+            return turnCounter;
+        },
+        set turnCounter(num) {
+            turnCounter = num;
+        },
         printBoard,
         playerInfo,
         set firstPlayer(player) {
@@ -154,7 +170,10 @@ const Game = () => {
         },
         set secondPlayer(player) {
             secondPlayer = Player(player.name, player.mark);
-        }
+        },
+        checkPlayer,
+        verifyUpdate,
+        checkWin
     };
 };
 
@@ -167,11 +186,81 @@ const changeSymbolsForm = document.querySelector('#change-player-mark');
 const submitMarksBtn = document.querySelector('#submit-marks-btn');
 const board = document.querySelector('#board');
 const playerInfo = document.querySelector('#player-info');
+const turnInfo = document.querySelector('#turn-info');
+const choosePosnForm = document.querySelector('#choose-posn');
+const choosePosnBtn = document.querySelector('#submit-position');
+const chosenPosn = document.querySelector('#position');
+const validationInfo = document.querySelector('#validation-info');
+const winnerInfo = document.querySelector('#winner-info');
+const playAgainBtn = document.querySelector('#play-again-btn')
+
+const displayBoard = (game) => {
+    board.textContent = '';
+    stringBoard = game.printBoard().split('\n');
+    stringBoard.forEach((line) => {
+        row = document.createElement('span');
+        row.textContent = line;
+        board.appendChild(row);
+    });
+}
+
+const play = (game) => {
+    turnInfo.textContent = `${game.checkPlayer().name}(${game.checkPlayer().symbol}), it is your turn to play.
+    Choose the number to play:`;
+
+    choosePosnForm.classList.remove('hidden');
+
+    displayBoard(game);
+    choosePosnBtn.addEventListener('click', (evt) => {
+        evt.stopImmediatePropagation();
+        let position = chosenPosn.value;
+        let verified = game.verifyUpdate(position);
+
+        if (verified === true) {
+            validationInfo.classList.add('hidden');
+
+
+            if (game.turnCounter >= 4 && game.checkWin()) {
+                winnerInfo.textContent = `There is a WINNER: ${game.checkPlayer().name}`;
+                winnerInfo.classList.remove('hidden');
+                playAgainBtn.classList.remove('hidden');
+                startGame();
+            } else {
+
+                game.turnCounter += 1;
+                if (game.turnCounter === 9) {
+                    winnerInfo.textContent = 'DRAW';
+                    winnerInfo.classList.remove('hidden');
+                    playAgainBtn.classList.remove('hidden');
+                } else {
+                    play(game);
+                }
+
+            }
+
+        } else {
+            validationInfo.textContent = verified;
+            validationInfo.classList.remove('hidden');
+        }
+
+    });
+
+    // playAgainBtn.addEventListener('click', () => {
+    //     // reset board
+    //     startGame();
+
+    // });
+}
 
 const startGame = () => {
     startGameBtn.addEventListener('click', () => {
         playerDetailsForm.classList.remove('hidden');
         startGameBtn.classList.add('hidden');
+    });
+
+    playAgainBtn.addEventListener('click', () => {
+        playerDetailsForm.classList.remove('hidden');
+        playAgainBtn.classList.add('hidden');
     });
 
     const game = Game();
@@ -184,22 +273,8 @@ const startGame = () => {
         game.secondPlayer = { name: playerTwo, mark: 'O' };
         playerInfo.textContent = game.playerInfo();
 
-        stringBoard = game.printBoard().split('\n');
-        stringBoard.forEach((line) => {
-            row = document.createElement('span');
-            row.textContent = line;
-            board.appendChild(row);
-        });
-
         playerDetailsForm.classList.add('hidden');
         changeSymbolsForm.classList.remove('hidden');
-
-        // if (!isNoErrors()) {
-        //     const myBook = new Book(title, pages, author, readStatus);
-        //     addBookToLibrary(myBook);
-        //     newBookForm.reset();
-        //     displayBooks();
-        // }
     });
 
     submitMarksBtn.addEventListener('click', () => {
@@ -210,62 +285,9 @@ const startGame = () => {
 
             playerInfo.textContent = game.playerInfo();
             changeSymbolsForm.replaceWith(playerInfo);
+            play(game);
         }
     });
 }
 
 startGame();
-// console.log('Welcome to Tic Tac Toe!');
-// // loop do# rubocop: todo Metrics / BlockLength
-// let gameOn = true;
-// while (gameOn) {
-//     console.log("Would you like to play a game of tic tac toe? Please enter ' [y] es ' or ' [n] o '");
-// }
-// puts "Would you like to play a game of tic tac toe? Please enter '[y]es' or '[n]o'"
-// play_game = gets.chomp[0].downcase
-// let playGame =
-// while % w[y n].include ? (play_game) == false
-// puts "Please enter '[y]es' or '[n]o'"
-// play_game = gets.chomp.downcase
-// end
-// if play_game[0] == 'y'
-// puts 'We are going to start the game shortly after asking you a few more questions'
-// game = Game.new
-// puts 'What is the name of first player'
-// first_player = gets.chomp.capitalize
-// puts 'What is the name of second player'
-// second_player = gets.chomp.capitalize
-// game.players(first_player, second_player)
-// puts game.print_board
-// puts game.player_info
-// puts 'Do you want to change the symbols of players. If yes, push [y]'
-// chosen = gets.chomp.downcase
-// game.change_symbol(first_player, second_player) if chosen[0] == 'y'
-// puts game.player_info
-// loop do
-//     game.check_player
-// puts "It is #{game.check_player.keys[0]}'s turn"
-// loop do
-//     puts game.print_board
-// puts 'Choose the number to play'
-// chosen = gets.chomp.to_i
-// break unless game.verify_update(chosen).is_a ? String
-
-// puts game.verify_update(chosen)
-// end
-// winner = game.check_win
-// if winner and game.turn_counter >= 4
-// puts "There is a WINNER: #{game.check_player.keys[0]}"
-// break
-// end
-// game.turn_increase
-// next unless game.turn_counter == 9
-
-// puts 'DRAW'
-// break
-// end
-// elsif play_game[0] == 'n'
-// puts 'Hope to see you again. Bye.'
-// break
-// end
-// end
