@@ -14,7 +14,7 @@
                 <button type="button" id="start-game-btn" class="primary-btn start-game-btn">Start a new game</button>
                 <button type="button" id="read-instructions-btn" class="hidden-element primary-btn read-instructions-btn">Read instructions</button>
             </div>
-            <form id="names-form" class="names-form hidden-element">
+            <form id="names-form" class="names-form">
                 <div class="player-names-div">
                     <label for="player-one-name" class="player-names-labels">What is the name of the first player? </label>
                     <input type="text" id="player-one-name" placeholder="Enter player one name here...">
@@ -31,19 +31,9 @@
     </section>
     <section
         id="gamebord-section"
-        class="gamebord-section width-90 height-90 centered-horizontal centers-h-v hidden-element">
-        <div class="gamebord-container">
-            <div class="board-cell"></div>
-            <div class="board-cell"></div>
-            <div class="board-cell"></div>
-            <div class="board-cell"></div>
-            <div class="board-cell"></div>
-            <div class="board-cell"></div>
-            <div class="board-cell"></div>
-            <div class="board-cell"></div>
-            <div class="board-cell"></div>
-        </div>
+        class="gamebord-section width-90 height-90 centered-horizontal centers-h-v">
+        <div id="gamebord-container" class="gamebord-container"/>
     </section>
-    <script type="module" src="./javascript/index.js"></script>
+    <script type="module" src="./javascript/gameBoard.js"></script>
 </body>
 </html>
