@@ -205,6 +205,7 @@ const playAgainBtn = document.querySelector('#play-again-btn');
 const topSection = document.querySelector('#top-section');
 let game = null;
 
+
 const displayBoard = (game) => {
     board.textContent = '';
     stringBoard = game.printBoard().split('\n');
@@ -233,6 +234,7 @@ const play = (game) => {
                 winnerInfo.textContent = `There is a WINNER: ${game.checkPlayer().name}`;
                 winnerInfo.classList.remove('hidden');
                 playAgainBtn.classList.remove('hidden');
+                game.board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
                 startGame();
             } else {
@@ -242,7 +244,7 @@ const play = (game) => {
                     winnerInfo.textContent = 'DRAW';
                     winnerInfo.classList.remove('hidden');
                     playAgainBtn.classList.remove('hidden');
-
+                    game.board = [1, 2, 3, 4, 5, 6, 7, 9];
                     startGame();
                 } else {
                     play(game);
@@ -275,7 +277,7 @@ const startGame = () => {
     });
 
     game = Game();
-    game.board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    // game.board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let playerOne = '';
     let playerTwo = '';
     submitPlayersBtn.addEventListener('click', (evt) => {
