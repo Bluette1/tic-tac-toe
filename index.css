@@ -1,57 +1,57 @@
 * {
-    box-sizing: border-box;
-    font-family: monospace, sans-serif;
+  box-sizing: border-box;
+  font-family: monospace, sans-serif;
 }
 
 body {
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .centered-h-v {
-    display: grid;
-    place-items: center;
+  display: grid;
+  place-items: center;
 }
 
 .centered-text {
-    text-align: center;
+  text-align: center;
 }
 
 .margin-top-20 {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .margin-bottom-20 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .primary-btn {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .rounded-corners {
-    border-radius: 0.2rem;
+  border-radius: 0.2rem;
 }
 
 .custom-borders {
-    border: 1px solid rgb(116, 116, 116);
-    outline: none;
+  border: 1px solid rgb(116, 116, 116);
+  outline: none;
 }
 
 input[type="radio"] {
-    vertical-align: middle;
-    margin-top: -1px;
+  vertical-align: middle;
+  margin-top: -1px;
 }
 
 .padding-right-10 {
-    padding-right: 10px;
+  padding-right: 10px;
 }
 
 .padding-left-10 {
-    padding-left: 10px;
+  padding-left: 10px;
 }
