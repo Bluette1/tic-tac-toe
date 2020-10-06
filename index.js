@@ -12,12 +12,11 @@ const Board = (array = [1, 2, 3, 4, 5, 6, 7, 8, 9]) => {
 
     const printBoard = () => {
         boardString = `
-             |${board[0]}|${board[1]}|${board[2]}|
-             |_|_|_|
-             |${board[3]}|${board[4]}|${board[5]}|
-             |_|_|_|
-             |${board[6]}|${board[7]}|${board[8]}|
-             |_|_|_| 
+             |            ${board[0]}            |            ${board[1]}            |            ${board[2]}             |
+             |            _            |            _            |            _           |
+             |            ${board[3]}            |            ${board[4]}            |            ${board[5]}            |
+             |          _          |          _          |         _          |
+             |            ${board[6]}            |            ${board[7]}            |            ${board[8]}            |
              `;
 
         return boardString;
@@ -195,8 +194,6 @@ const validationInfo = document.querySelector('#validation-info');
 const winnerInfo = document.querySelector('#winner-info');
 const playAgainBtn = document.querySelector('#play-again-btn');
 const topSection = document.querySelector('#top-section');
-let game = null;
-
 
 const displayBoard = (game) => {
     board.textContent = '';
@@ -275,7 +272,6 @@ const startGame = () => {
     submitPlayersBtn.addEventListener('click', (evt) => {
         evt.stopImmediatePropagation();
         evt.preventDefault();
-        // game = Game();
         playerOne = firstPlayer.value;
         playerTwo = secondPlayer.value;
         game.firstPlayer = { name: playerOne, mark: 'X' };
@@ -285,21 +281,22 @@ const startGame = () => {
         playerDetailsForm.classList.add('hidden');
         changeSymbolsForm.reset();
         changeSymbolsForm.classList.remove('hidden');
+        playerInfo.after(changeSymbolsForm);
     });
 
     submitMarksBtn.addEventListener('click', (evt) => {
         evt.stopImmediatePropagation();
         const changeMarks = document.querySelector('input[name=change-symbols]:checked').value;
-        if (changeMarks) {
+        if (changeMarks != 'keep-symbols') {
             game.firstPlayer = { name: playerOne, mark: 'O' };
             game.secondPlayer = { name: playerTwo, mark: 'X' };
-
-            playerInfo.textContent = game.playerInfo();
-            topSection.appendChild(playerInfo);
-            // changeSymbolsForm.replaceWith(playerInfo);
-            changeSymbolsForm.classList.add('hidden')
-            play(game);
         }
+        playerInfo.textContent = game.playerInfo();
+        topSection.appendChild(playerInfo);
+        changeSymbolsForm.classList.add('hidden')
+
+        play(game);
+
     });
 }
 
