@@ -53,7 +53,12 @@ const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
     if (winner) { field.innerHTML = `Wow, ${winner.name} has won the game!`; } else { field.innerHTML = 'This is a draw!'; }
   };
 
-  const updateBoard = (clickEvent, currentPlayer) => {
+  const displayCurrentPlayer = (field, currentPlayer, otherPlayer) => {
+    field.classList.remove('hidden-element');
+    field.innerHTML = `${currentPlayer.name} has made a move, ${otherPlayer.name}, it's your turn!`;
+  };
+
+  const updateBoard = (clickEvent, currentPlayer, otherPlayer) => {
     let isPlayed;
     const { i, j } = clickEvent.target.dataset;
     for (let n = 0; n < playersBoardArr.length; n += 1) {
@@ -78,6 +83,7 @@ const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
     const winDiagonal = GameFlow.checkWin(produceDiagonals(currBoard));
     const winVertical = GameFlow.checkWin(produceVerticals(currBoard));
     const draw = GameFlow.checkDraw(currBoard);
+    displayCurrentPlayer(fieldOfWinner, currentPlayer, otherPlayer);
     if (winRow || winDiagonal || winVertical) {
       displayWinnerOrDraw(fieldOfWinner, currentPlayer, optionsDiv, newRoundBtn);
       gameBoardContainer.setAttribute('disabled', 'disabled');
@@ -90,7 +96,7 @@ const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
   };
 
   gameBoardContainer.addEventListener('mousedown', event => {
-    updateBoard(event, allPlayers[0]);
+    updateBoard(event, allPlayers[0], allPlayers[1]);
   });
   return { displayBoard };
 };
