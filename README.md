@@ -21,7 +21,7 @@ This project was done for learning purpose, the aim was to master objects, objec
 - User can play as many games as they want
 
 ## Deployment
-[Library app on netlify]()
+[TicTacToe app on netlify](https://eloquent-hopper-9cff17.netlify.app)
 
 ## Running and testing it locally
 
@@ -49,16 +49,16 @@ No special pre-requisite required for this project
 
 There are two ways of contributing to this project:
 
-1.  If you see something wrong or not working, please check [the issue tracker section](https://github.com/descholar-ceo/library/issues ), if that problem you met is not in already opened issues then open a new issue by clicking on `new issue` button.
+1.  If you see something wrong or not working, please check [the issue tracker section](https://github.com/bluette1/tic-tac-toe/issues ), if that problem you met is not in already opened issues then open a new issue by clicking on `new issue` button.
 
 2.  If you have a solution to that, and you are willing to work on it, follow the below steps to contribute:
     1.  Fork this repository
-    1.  Clone it on your local computer by running `git clone https://github.com/your-username/library.git` __Replace *your username* with the username you use on github__
+    1.  Clone it on your local computer by running `git clone https://github.com/your-username/tic-tac-toe.git` __Replace *your username* with the username you use on github__
     1.  Open the cloned repository which appears as a folder on your local computer with your favorite code editor
     1.  Create a separate branch off the *master branch*,
     1.  Write your codes which fix the issue you found
     1.  Commit and push the branch you created
-    1.  Raise a pull request, comparing your new created branch with our original master branch [here](https://github.com/descholar-ceo/library)
+    1.  Raise a pull request, comparing your new created branch with our original master branch [here](https://github.com/bluette1/tic-tac-toe)
 
 ## Author
 

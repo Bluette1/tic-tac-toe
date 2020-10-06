@@ -1,4 +1,3 @@
-// import StartGame from './user-interface.js';
 import Player from './player.js';
 import GameFlow from './gameFlow.js';
 
@@ -37,6 +36,9 @@ const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
 
         const boardCellContent = document.createElement('h1');
         boardCellContent.innerText = board[i][j];
+        if (board[i][j] === 'X' || board[i][j] === 'O') {
+          boardCell.setAttribute('disabled', 'disabled');
+        }
 
         boardCell.appendChild(boardCellContent);
         gameBoardContainer.appendChild(boardCell);
