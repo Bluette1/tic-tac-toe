@@ -1,4 +1,4 @@
-# Library app
+# tic-tac-toe app
 ![Linters](https://github.com/bluette1/tic-tac-toe/workflows/Linters/badge.svg)
 
 ## Project description
