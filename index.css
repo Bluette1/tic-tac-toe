@@ -101,7 +101,7 @@ body {
 
 .intro-section {
   height: fit-content;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .gamebord-section {
@@ -112,7 +112,7 @@ body {
 .gamebord-container {
   border: 1px solid rgb(189, 199, 255);
   width: 30%;
-  height: 80%;
+  height: 60%;
   padding: 0;
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
@@ -124,4 +124,10 @@ body {
 
 .hidden-element {
   display: none;
+}
+
+div[disabled=disabled] {
+  cursor:not-allowed;
+  pointer-events: none;
+  opacity: 0.7;
 }
