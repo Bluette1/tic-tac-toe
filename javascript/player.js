@@ -16,14 +16,6 @@ const Player = (markOne = 'X', markTwo = 'O') => {
     return playersArr;
   };
 
-  // const getOtherPlayer = (playersArr, currentPlayer) => {
-  //     if (playersArr.indexOf(currentPlayer) === 0) {
-  //         const otherPlayer = playersArr[1];
-  //         // playersArr[0] = otherPlayer;
-  //         // playersArr[1] = currentPlayer;
-  //     }
-  //     return playersArr;
-  // };
   return {
     getAllPlayers,
     changeCurrentPlayer,

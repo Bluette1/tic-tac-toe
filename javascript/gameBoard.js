@@ -83,7 +83,10 @@ const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
     const winDiagonal = GameFlow.checkWin(produceDiagonals(currBoard));
     const winVertical = GameFlow.checkWin(produceVerticals(currBoard));
     const draw = GameFlow.checkDraw(currBoard);
-    displayCurrentPlayer(fieldOfWinner, currentPlayer, otherPlayer);
+    if (isPlayed) {
+      displayCurrentPlayer(fieldOfWinner, currentPlayer, otherPlayer);
+    }
+
     if (winRow || winDiagonal || winVertical) {
       displayWinnerOrDraw(fieldOfWinner, currentPlayer, optionsDiv, newRoundBtn);
       gameBoardContainer.setAttribute('disabled', 'disabled');
