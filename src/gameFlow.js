@@ -38,7 +38,7 @@ const GameFlow = () => {
     return false;
   };
   const boardReset = () => [['', '', ''], ['', '', ''], ['', '', '']];
-  // const resetGame = (gameObj) => {};
+
   return {
     boardReset, checkWin, checkDraw, convertBoardArrToOrdinarryArr,
   };
