@@ -220,9 +220,11 @@ const play = (game) => {
         if (verified === true) {
             validationInfo.classList.add('hidden');
             if (game.turnCounter >= 4 && game.checkWin()) {
-                winnerInfo.textContent = `There is a WINNER: ${game.checkPlayer().name}`;
+                winnerInfo.textContent = `There is a WINNER: ${game.checkPlayer().name}!!`;
                 winnerInfo.classList.remove('hidden');
                 playAgainBtn.classList.remove('hidden');
+                choosePosnForm.classList.add('hidden');
+                turnInfo.classList.add('hidden');
                 game.board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
                 game.turnCounter = 0;
                 startGame();
@@ -233,6 +235,8 @@ const play = (game) => {
                     winnerInfo.textContent = 'DRAW';
                     winnerInfo.classList.remove('hidden');
                     playAgainBtn.classList.remove('hidden');
+                    choosePosnForm.classList.add('hidden');
+                    turnInfo.classList.add('hidden');
                     game.board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
                     game.turnCounter = 0;
                     startGame();
@@ -261,6 +265,7 @@ const startGame = () => {
         board.textContent = '';
         playerInfo.textContent = '';
         turnInfo.textContent = '';
+        turnInfo.classList.remove('hidden');
         winnerInfo.textContent = '';
         validationInfo.textContent = '';
         choosePosnForm.classList.add('hidden');
