@@ -1,7 +1,6 @@
 import Board from './gameBoard.js';
 
 const introHeader = document.querySelector('#intro-header');
-// const introSection = document.querySelector('#intro-section');
 const optionsDiv = document.querySelector('#options-div');
 const namesForm = document.querySelector('#names-form');
 const gameBoardSection = document.querySelector('#gamebord-section');
@@ -9,11 +8,15 @@ const startGameBtn = document.querySelector('#start-game-btn');
 const playBtn = document.querySelector('#play-btn');
 const playerOneField = document.querySelector('#player-one-name');
 const playerTwoField = document.querySelector('#player-two-name');
+const newRoundBtn = document.querySelector('#new-round-btn');
+const gameBoardContainer = document.querySelector('#gamebord-container');
 
 const triggers = () => {
   const startNewGame = () => {
     startGameBtn.addEventListener('click', () => {
       namesForm.classList.remove('hidden-element');
+      gameBoardSection.classList.add('hidden-element');
+      namesForm.reset();
     });
   };
 
@@ -31,14 +34,29 @@ const triggers = () => {
     playBtn.addEventListener('click', () => {
       if (getPlayersNames().length !== 0) {
         optionsDiv.classList.add('hidden-element');
+        namesForm.classList.add('hidden-element');
         introHeader.classList.add('hidden-element');
         gameBoardSection.classList.remove('hidden-element');
-        Board(getPlayersNames(), introHeader).displayBoard();
+        gameBoardContainer.setAttribute('disabled', false);
+        Board(getPlayersNames(), introHeader, optionsDiv, newRoundBtn).displayBoard();
       }
     });
   };
-  return { startNewGame, play };
+  const playNewRound = () => {
+    newRoundBtn.addEventListener('click', () => {
+      if (getPlayersNames().length !== 0) {
+        optionsDiv.classList.add('hidden-element');
+        namesForm.classList.add('hidden-element');
+        introHeader.classList.add('hidden-element');
+        gameBoardSection.classList.remove('hidden-element');
+        gameBoardContainer.setAttribute('disabled', false);
+        Board(getPlayersNames(), introHeader, optionsDiv, newRoundBtn).displayBoard();
+      }
+    });
+  };
+  return { startNewGame, play, playNewRound };
 };
 
 triggers().startNewGame();
 triggers().play();
+triggers().playNewRound();

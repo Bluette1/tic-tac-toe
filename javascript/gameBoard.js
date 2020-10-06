@@ -2,9 +2,10 @@
 import Player from './player.js';
 import GameFlow from './gameFlow.js';
 
-const Board = (players, fieldOfWinner) => {
+const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
   const allPlayers = Player('X', 'O').getAllPlayers(players);
-  const playersBoardArr = GameFlow.boardReset();
+  const gameBoardContainer = document.querySelector('#gamebord-container');
+  let playersBoardArr = GameFlow.boardReset();
   const copyOfBoard = (passedBoardArr) => passedBoardArr.map(arr => arr.slice());
   let currBoard = copyOfBoard(playersBoardArr);
 
@@ -24,7 +25,6 @@ const Board = (players, fieldOfWinner) => {
     return [leftVertical, middleVertical, rightVertical];
   };
 
-  const gameBoardContainer = document.querySelector('#gamebord-container');
   const displayBoard = (board = playersBoardArr) => {
     gameBoardContainer.innerHTML = '';
     for (let i = 0; i < board.length; i += 1) {
@@ -35,7 +35,7 @@ const Board = (players, fieldOfWinner) => {
         boardCell.dataset.i = i;
         boardCell.dataset.j = j;
 
-        const boardCellContent = document.createElement('p');
+        const boardCellContent = document.createElement('h1');
         boardCellContent.innerText = board[i][j];
 
         boardCell.appendChild(boardCellContent);
@@ -44,8 +44,10 @@ const Board = (players, fieldOfWinner) => {
     }
   };
 
-  const displayWinnerOrDraw = (field, winner) => {
+  const displayWinnerOrDraw = (field, winner, optionsDiv, newRoundBtn) => {
     field.classList.remove('hidden-element');
+    newRoundBtn.classList.remove('hidden-element');
+    optionsDiv.classList.remove('hidden-element');
     if (winner) { field.innerHTML = `Wow, ${winner.name} has won the game!`; } else { field.innerHTML = 'This is a draw!'; }
   };
 
@@ -64,12 +66,15 @@ const Board = (players, fieldOfWinner) => {
     const winRow = GameFlow.checkWin(currBoard);
     const winDiagonal = GameFlow.checkWin(produceDiagonals(currBoard));
     const winVertical = GameFlow.checkWin(produceVerticals(currBoard));
+    const draw = GameFlow.checkDraw(currBoard);
     if (winRow || winDiagonal || winVertical) {
-      displayWinnerOrDraw(fieldOfWinner, currentPlayer);
+      displayWinnerOrDraw(fieldOfWinner, currentPlayer, optionsDiv, newRoundBtn);
       gameBoardContainer.setAttribute('disabled', 'disabled');
-    } else if (GameFlow.checkDraw(currBoard)) {
-      displayWinnerOrDraw(fieldOfWinner);
+      playersBoardArr = GameFlow.boardReset();
+    } else if (draw) {
+      displayWinnerOrDraw(fieldOfWinner, undefined, optionsDiv, newRoundBtn);
       gameBoardContainer.setAttribute('disabled', 'disabled');
+      playersBoardArr = GameFlow.boardReset();
     }
   };
 
