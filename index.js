@@ -203,7 +203,7 @@ const displayBoard = (game) => {
   });
 };
 
-const play = (game, reset) => {
+const play = (game) => {
   turnInfo.textContent = `${game.checkPlayer().name}(${game.checkPlayer().symbol}), it is your turn to play.
     Choose the number to play:`;
 
@@ -225,7 +225,6 @@ const play = (game, reset) => {
         turnInfo.classList.add('hidden');
         game.board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         game.turnCounter = 0;
-        reset();
       } else {
         game.turnCounter += 1;
         if (game.turnCounter === 9) {
@@ -236,7 +235,6 @@ const play = (game, reset) => {
           turnInfo.classList.add('hidden');
           game.board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
           game.turnCounter = 0;
-          reset();
         } else {
           play(game);
         }
