@@ -13,9 +13,9 @@ const GameFlow = () => {
   const checkWin = (boardArr) => {
     for (let i = 0; i < boardArr.length; i += 1) {
       if (
-        boardArr[i][0] === 'X' || boardArr[i][0] === 'O'
-        || boardArr[i][1] === 'X' || boardArr[i][1] === 'O'
-        || boardArr[i][2] === 'X' || boardArr[i][2] === 'O') {
+        boardArr[i][0] === 'X' || boardArr[i][0] === 'O' ||
+        boardArr[i][1] === 'X' || boardArr[i][1] === 'O' ||
+        boardArr[i][2] === 'X' || boardArr[i][2] === 'O') {
         if (boardArr[i][0] === boardArr[i][1] && boardArr[i][1] === boardArr[i][2]) {
           return true;
         }
@@ -37,10 +37,17 @@ const GameFlow = () => {
     }
     return false;
   };
-  const boardReset = () => [['', '', ''], ['', '', ''], ['', '', '']];
+  const boardReset = () => [
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', '']
+  ];
 
   return {
-    boardReset, checkWin, checkDraw, convertBoardArrToOrdinarryArr,
+    boardReset,
+    checkWin,
+    checkDraw,
+    convertBoardArrToOrdinarryArr
   };
 };
 
