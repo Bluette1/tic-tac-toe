@@ -8,7 +8,6 @@ const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
   const copyOfBoard = (passedBoardArr) => passedBoardArr.map(arr => arr.slice());
   let currBoard = copyOfBoard(playersBoardArr);
 
-
   const produceDiagonals = boardArr => {
     const ordinaryArr = GameFlow.convertBoardArrToOrdinarryArr(boardArr);
     const forwardDiagonal = [ordinaryArr[0], ordinaryArr[4], ordinaryArr[8]];
