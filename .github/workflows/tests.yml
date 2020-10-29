@@ -5,9 +5,9 @@ name: Test with jest
 
 on:
   push:
-    branches: [ feature/add-testing-practice ]
+    branches: [ feature/add-tests ]
   pull_request:
-    branches: [ feature/add-testing-practice ]
+    branches: [ feature/add-tests ]
 
 jobs:
   build:
