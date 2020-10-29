@@ -1,5 +1,6 @@
 # tic-tac-toe app
-![Linters](https://github.com/bluette1/tic-tac-toe/workflows/Linters/badge.svg)
+![Linters](https://github.com/bluette1/tic-tac-toe/workflows/Linters/badge.svg) 
+![Test with jest](https://github.com/Bluette1/tic-tac-toe/workflows/Test%20with%20jest/badge.svg)
 
 ## Project description
 This project is an implementation of the tic-tac-toe game.
