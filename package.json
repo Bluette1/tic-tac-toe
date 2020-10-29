@@ -20,7 +20,7 @@
     "javascript design patterns",
     "objects",
     "factories",
-    "jest"  
+    "jest"
   ],
   "author": "descholar-ceo <emmanuellamugi@gmail.com> and marylene <marylene.sawyer@gmail.com>",
   "license": "MIT",
@@ -33,6 +33,7 @@
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
     "html-webpack-plugin": "^4.5.0",
+    "identity-obj-proxy": "^3.0.0",
     "mini-css-extract-plugin": "^1.0.0",
     "node-sass": "^4.14.1",
     "stylelint": "^13.7.2",
@@ -44,16 +45,26 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "babel-loader": "^8.1.0",
     "bootstrap": "^4.5.2",
+    "css-loader": "^4.3.0",
     "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "file-loader": "^6.1.1",
+    "jest": "^26.6.1",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "sass-loader": "^10.0.3",
-    "style-loader": "^2.0.0",
-    "babel-loader": "^8.1.0",
-    "file-loader": "^6.1.1",
-    "css-loader": "^4.3.0"
+    "style-loader": "^2.0.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
+      "transform": {
+        "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/fileTransformer.js"
+      }
+    }
   }
 }
