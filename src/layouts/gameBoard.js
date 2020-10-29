@@ -1,5 +1,5 @@
-import Player from './player.js';
-import GameFlow from './gameFlow.js';
+import Player from '../components/player';
+import GameFlow from '../components/gameFlow.js';
 
 const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
   const allPlayers = Player('X', 'O').getAllPlayers(players);

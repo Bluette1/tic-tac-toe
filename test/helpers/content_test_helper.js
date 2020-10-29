@@ -38,8 +38,8 @@ id="gamebord-section"
 class="gamebord-section width-90 height-90 centered-horizontal centers-h-v hidden-element">
 <div id="gamebord-container" class="gamebord-container"/>
 </section>
-<script type="module" src="./src/index.js"></script>`
+<script type="module" src="./src/index.js"></script>`;
 
-const initialBoard = `<div class=\"centers-h-v\" data-i=\"0\" data-j=\"0\"><h1></h1></div><div class=\"centers-h-v\" data-i=\"0\" data-j=\"1\"><h1></h1></div><div class=\"centers-h-v\" data-i=\"0\" data-j=\"2\"><h1></h1></div><div class=\"centers-h-v\" data-i=\"1\" data-j=\"0\"><h1></h1></div><div class=\"centers-h-v\" data-i=\"1\" data-j=\"1\"><h1></h1></div><div class=\"centers-h-v\" data-i=\"1\" data-j=\"2\"><h1></h1></div><div class=\"centers-h-v\" data-i=\"2\" data-j=\"0\"><h1></h1></div><div class=\"centers-h-v\" data-i=\"2\" data-j=\"1\"><h1></h1></div><div class=\"centers-h-v\" data-i=\"2\" data-j=\"2\"><h1></h1></div>`
+const initialBoard = '<div class="centers-h-v" data-i="0" data-j="0"><h1></h1></div><div class="centers-h-v" data-i="0" data-j="1"><h1></h1></div><div class="centers-h-v" data-i="0" data-j="2"><h1></h1></div><div class="centers-h-v" data-i="1" data-j="0"><h1></h1></div><div class="centers-h-v" data-i="1" data-j="1"><h1></h1></div><div class="centers-h-v" data-i="1" data-j="2"><h1></h1></div><div class="centers-h-v" data-i="2" data-j="0"><h1></h1></div><div class="centers-h-v" data-i="2" data-j="1"><h1></h1></div><div class="centers-h-v" data-i="2" data-j="2"><h1></h1></div>';
 
-export {bodyContent, initialBoard};
+export { bodyContent, initialBoard };

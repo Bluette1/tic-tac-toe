@@ -1,4 +1,5 @@
-import Board from './gameBoard.js';
+import './assets/styles/index.css';
+import Board from './layouts/gameBoard';
 
 const introHeader = document.querySelector('#intro-header');
 const optionsDiv = document.querySelector('#options-div');

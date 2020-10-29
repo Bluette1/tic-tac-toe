@@ -1,4 +1,4 @@
-import Player from '../src/player';
+import Player from '../src/components/player';
 
 const markOne = 'X';
 const markTwo = 'O';

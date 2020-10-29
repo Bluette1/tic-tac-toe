@@ -1,4 +1,4 @@
-import GameFlow from '../src/gameFlow';
+import GameFlow from '../src/components/gameFlow';
 
 const twoDArray = [
   ['', '', ''],
