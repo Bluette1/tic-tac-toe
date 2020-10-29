@@ -16,6 +16,8 @@ jobs:
           node-version: "12.x"
       - name: Install dependencies
         run: yarn install
+      - name: Install express
+        run: yarn add express
       - name: Setup ESLint
         run: |
           npm install --save-dev eslint@6.8.x eslint-config-airbnb-base@14.1.x eslint-plugin-import@2.20.x
