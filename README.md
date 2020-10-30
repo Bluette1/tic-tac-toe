@@ -8,7 +8,7 @@ This project is an implementation of the tic-tac-toe game.
 This project was done for learning purpose, the aim was to master objects, objects constructors and factories in javascript. The project's specifications are listed on [The odin project](https://www.theodinproject.com/courses/javascript/lessons/tic-tac-toe-javascript)
 
 ## Screenshot
-![demo picture](./public/images/game-screenshot.png)
+![demo picture](./src/assets/images/game-screenshot.png)
 
 ## Built with
 - HTML5
@@ -33,7 +33,9 @@ No special pre-requisite required for this project
 - Run `git clone https://github.com/bluette1/tic-tac-toe && cd tic-tac-toe` to get a copy of source codes on your local computer and to navigate inside the project directory
 
 ### Usage
-- If you have a live-server installed on you computer, you can open `index.html` file with that server, or simply open `index.html` file with your favorite browser
+- Run `yarn install` to install dependencies
+
+- Run `yarn dev` to run this app in development environment or `yarn start` to run this project in production environment
 
 ### Game Instructions
 - For details about the tic tac toe game, read [here](https://en.wikipedia.org/wiki/Tic-tac-toe).
@@ -44,7 +46,11 @@ No special pre-requisite required for this project
 
 
 ### Tests
-- No test yet
+- You can run tests using the following commands
+```
+yarn install
+yarn test
+```
 
 ## Contributions
 
