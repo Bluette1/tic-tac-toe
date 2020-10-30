@@ -85,4 +85,4 @@ There are two ways of contributing to this project:
 Give a ⭐️ if you like this project!
 
 ## Acknowledgment
-* [Microverse](https://www.microvese.org)
+* [Microverse](https://www.microverse.org)
