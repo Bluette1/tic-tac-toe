@@ -1,10 +1,6 @@
-/**
- * @jest-environment jsdom
- */
-
 import Board from '../src/layouts/gameBoard';
 import { bodyContent, initialBoard } from './helpers/content_test_helper';
-// Inject DOM element, and add code to test logic
+
 document.body.innerHTML = bodyContent;
 const introHeader = document.querySelector('#intro-header');
 const optionsDiv = document.querySelector('#options-div');
