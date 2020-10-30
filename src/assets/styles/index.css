@@ -28,6 +28,7 @@ body {
 }
 
 .centers-h-v {
+  display: -ms-grid;
   display: grid;
   place-items: center;
 }
