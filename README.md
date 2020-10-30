@@ -48,7 +48,6 @@ No special pre-requisite required for this project
 ### Tests
 - You can run tests using the following commands
 ```
-yarn install
 yarn test
 ```
 
