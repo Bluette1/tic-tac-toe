@@ -106,6 +106,7 @@ body {
 }
 
 .gamebord-section {
+  display: -ms-grid;
   display: grid;
   place-items: center;
 }
