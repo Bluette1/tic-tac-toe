@@ -3,6 +3,8 @@ import {
   produceVerticals,
   displayWinnerOrDraw,
   displayCurrentPlayer,
+  checkWin,
+  checkDraw
 } from '../src/helpers/gameBoardHelper';
 import { bodyContent } from './helpers/content_test_helper';
 
@@ -63,4 +65,24 @@ test('displayCurrentPlayer displays the current player', () => {
   displayCurrentPlayer(introHeader, players[0], players[1]);
   expect(introHeader.classList.contains('hidden-element')).toBe(false);
   expect(introHeader.innerHTML).toBe(`${players[0].name} has made a move, ${players[1].name}, it's your turn!`);
+});
+
+test('checkWin returns true if there is a winner', () => {
+  const mockCheckWin = jest.fn(() => true);
+  expect(checkWin(boardArr, mockCheckWin)).toBe(true)
+});
+
+test('checkWin returns false if there is no winner', () => {
+  const mockCheckWin = jest.fn(() => false);
+  expect(checkWin(boardArr, mockCheckWin)).toBe(false)
+});
+
+test('checkDraw returns true if there is a draw', () => {
+  const mockCheckWin = jest.fn(() => true);
+  expect(checkDraw(boardArr, mockCheckWin)).toBe(true)
+});
+
+test('checkDraw returns false if there is no draw', () => {
+  const mockCheckWin = jest.fn(() => false);
+  expect(checkDraw(boardArr, mockCheckWin)).toBe(false)
 });
