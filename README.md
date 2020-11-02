@@ -23,12 +23,9 @@ This project was done for learning purpose, the aim was to master objects, objec
 - User can play as many games as they want
 
 ## Deployment
-[TicTacToe app on netlify](https://eloquent-hopper-9cff17.netlify.app)
+[Play Tic Tac Toe game on netlify](https://eloquent-hopper-9cff17.netlify.app)
 
 ## Running and testing it locally
-
-### Prerequisites
-No special pre-requisite required for this project
 
 ### Setup
 - Run `git clone https://github.com/bluette1/tic-tac-toe && cd tic-tac-toe` to get a copy of source codes on your local computer and to navigate inside the project directory
