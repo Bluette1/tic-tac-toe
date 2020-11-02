@@ -2,7 +2,6 @@ import Player from '../components/player';
 import GameFlow from '../components/gameFlow.js';
 import { produceDiagonals, produceVerticals } from '../helpers/gameBoardHelper';
 
-
 const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
   const allPlayers = Player('X', 'O').getAllPlayers(players);
   const gameBoardContainer = document.querySelector('#gamebord-container');
@@ -68,10 +67,10 @@ const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
 
     const winRow = GameFlow.checkWin(currBoard);
     const winDiagonal = GameFlow.checkWin(produceDiagonals(
-      currBoard, GameFlow.convertBoardArrToOrdinarryArr
+      currBoard, GameFlow.convertBoardArrToOrdinarryArr,
     ));
     const winVertical = GameFlow.checkWin(produceVerticals(
-      currBoard, GameFlow.convertBoardArrToOrdinarryArr
+      currBoard, GameFlow.convertBoardArrToOrdinarryArr,
     ));
     const draw = GameFlow.checkDraw(currBoard);
     if (isPlayed) {

@@ -13,4 +13,4 @@ const produceVerticals = (boardArr, convertBoardArrToOrdinarryArr) => {
   return [leftVertical, middleVertical, rightVertical];
 };
 
-export { produceDiagonals, produceVerticals }
+export { produceDiagonals, produceVerticals };
