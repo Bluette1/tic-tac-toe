@@ -1,7 +1,12 @@
 import Player from '../components/player';
 import GameFlow from '../components/gameFlow.js';
 import {
-  produceDiagonals, produceVerticals, displayWinnerOrDraw, displayCurrentPlayer,
+  produceDiagonals,
+  produceVerticals,
+  displayWinnerOrDraw,
+  displayCurrentPlayer,
+  checkWin,
+  checkDraw
 } from '../helpers/gameBoardHelper';
 
 const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
@@ -55,14 +60,15 @@ const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
 
     displayBoard(currBoard);
 
-    const winRow = GameFlow.checkWin(currBoard);
-    const winDiagonal = GameFlow.checkWin(produceDiagonals(
+    const winRow = checkWin(currBoard, GameFlow.checkWin);
+    const winDiagonal = checkWin(produceDiagonals(
       currBoard, GameFlow.convertBoardArrToOrdinarryArr,
-    ));
-    const winVertical = GameFlow.checkWin(produceVerticals(
+    ), GameFlow.checkWin);
+    const winVertical = checkWin(produceVerticals(
       currBoard, GameFlow.convertBoardArrToOrdinarryArr,
-    ));
-    const draw = GameFlow.checkDraw(currBoard);
+    ), GameFlow.checkWin);
+    const draw = checkDraw(currBoard, GameFlow.checkDraw);
+
     if (isPlayed) {
       displayCurrentPlayer(fieldOfWinner, currentPlayer, otherPlayer);
     }

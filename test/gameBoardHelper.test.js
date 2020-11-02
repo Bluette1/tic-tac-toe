@@ -1,5 +1,8 @@
 import {
-  produceDiagonals, produceVerticals, displayWinnerOrDraw, displayCurrentPlayer,
+  produceDiagonals,
+  produceVerticals,
+  displayWinnerOrDraw,
+  displayCurrentPlayer,
 } from '../src/helpers/gameBoardHelper';
 import { bodyContent } from './helpers/content_test_helper';
 

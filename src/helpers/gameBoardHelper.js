@@ -24,6 +24,19 @@ const displayCurrentPlayer = (field, currentPlayer, otherPlayer) => {
   field.classList.remove('hidden-element');
   field.innerHTML = `${currentPlayer.name} has made a move, ${otherPlayer.name}, it's your turn!`;
 };
+
+const checkWin = (currBoard, checkGameWin) => {
+  return checkGameWin(currBoard);
+};
+
+const checkDraw = (currBoard, checkGameDraw) => {
+  return checkGameDraw(currBoard);
+};
 export {
-  produceDiagonals, produceVerticals, displayWinnerOrDraw, displayCurrentPlayer,
+  produceDiagonals,
+  produceVerticals,
+  displayWinnerOrDraw,
+  displayCurrentPlayer,
+  checkWin,
+  checkDraw
 };
