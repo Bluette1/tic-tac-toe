@@ -1,5 +1,6 @@
 import { produceDiagonals, produceVerticals, displayWinnerOrDraw } from '../src/helpers/gameBoardHelper';
 import { bodyContent } from './helpers/content_test_helper';
+
 const boardArr = [
   ['X', 'O', 'X'],
   ['O', 'O', 'O'],
@@ -36,7 +37,7 @@ test('produceVerticals returns the expected result', () => {
 });
 
 test('displayWinnerOrDraw displays the expected result when there\'s a winner ', () => {
-  const winner = { name: 'Mary', mark: 'X' }
+  const winner = { name: 'Mary', mark: 'X' };
   displayWinnerOrDraw(introHeader, winner, optionsDiv, newRoundBtn);
   expect(introHeader.classList.contains('hidden-element')).toBe(false);
   expect(newRoundBtn.classList.contains('hidden-element')).toBe(false);
