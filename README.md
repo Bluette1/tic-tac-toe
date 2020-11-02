@@ -1,4 +1,4 @@
-# tic-tac-toe app
+# Tic Tac Toe game
 ![Linters](https://github.com/bluette1/tic-tac-toe/workflows/Linters/badge.svg) 
 ![Test with jest](https://github.com/Bluette1/tic-tac-toe/workflows/Test%20with%20jest/badge.svg)
 
@@ -14,6 +14,7 @@ This project was done for learning purpose, the aim was to master objects, objec
 - HTML5
 - CSS3
 - Vanilla Javascript
+
 
 ## Features
 - User can start a new game
