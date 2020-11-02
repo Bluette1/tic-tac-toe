@@ -13,4 +13,11 @@ const produceVerticals = (boardArr, convertBoardArrToOrdinarryArr) => {
   return [leftVertical, middleVertical, rightVertical];
 };
 
-export { produceDiagonals, produceVerticals };
+const displayWinnerOrDraw = (field, winner, optionsDiv, newRoundBtn) => {
+  field.classList.remove('hidden-element');
+  newRoundBtn.classList.remove('hidden-element');
+  optionsDiv.classList.remove('hidden-element');
+  if (winner) { field.innerHTML = `Wow, ${winner.name} has won the game!`; } else { field.innerHTML = 'This is a draw!'; }
+};
+
+export { produceDiagonals, produceVerticals, displayWinnerOrDraw };

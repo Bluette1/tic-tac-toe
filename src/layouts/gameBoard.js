@@ -1,6 +1,6 @@
 import Player from '../components/player';
 import GameFlow from '../components/gameFlow.js';
-import { produceDiagonals, produceVerticals } from '../helpers/gameBoardHelper';
+import { produceDiagonals, produceVerticals, displayWinnerOrDraw } from '../helpers/gameBoardHelper';
 
 const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
   const allPlayers = Player('X', 'O').getAllPlayers(players);
@@ -29,13 +29,6 @@ const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
         gameBoardContainer.appendChild(boardCell);
       }
     }
-  };
-
-  const displayWinnerOrDraw = (field, winner, optionsDiv, newRoundBtn) => {
-    field.classList.remove('hidden-element');
-    newRoundBtn.classList.remove('hidden-element');
-    optionsDiv.classList.remove('hidden-element');
-    if (winner) { field.innerHTML = `Wow, ${winner.name} has won the game!`; } else { field.innerHTML = 'This is a draw!'; }
   };
 
   const displayCurrentPlayer = (field, currentPlayer, otherPlayer) => {

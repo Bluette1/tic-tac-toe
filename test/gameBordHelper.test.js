@@ -1,10 +1,17 @@
-import { produceDiagonals, produceVerticals } from '../src/helpers/gameBoardHelper';
-
+import { produceDiagonals, produceVerticals, displayWinnerOrDraw } from '../src/helpers/gameBoardHelper';
+import { bodyContent } from './helpers/content_test_helper';
 const boardArr = [
   ['X', 'O', 'X'],
   ['O', 'O', 'O'],
   ['O', 'X', 'X'],
 ];
+document.body.innerHTML = bodyContent;
+const introHeader = document.querySelector('#intro-header');
+const optionsDiv = document.querySelector('#options-div');
+const newRoundBtn = document.querySelector('#new-round-btn');
+optionsDiv.classList.add('hidden-element');
+introHeader.classList.add('hidden-element');
+
 test('produceDiagonals returns the expected result', () => {
   const mockConvertBoardArrToOrdinarryArr = jest.fn(() => ['X', 'O', 'X', 'O', 'O', 'O', 'O', 'X', 'X']);
 
@@ -26,4 +33,21 @@ test('produceVerticals returns the expected result', () => {
     ['X', 'O', 'X'],
   ];
   expect(actualResult).toEqual(expectedResult);
+});
+
+test('displayWinnerOrDraw displays the expected result when there\'s a winner ', () => {
+  const winner = { name: 'Mary', mark: 'X' }
+  displayWinnerOrDraw(introHeader, winner, optionsDiv, newRoundBtn);
+  expect(introHeader.classList.contains('hidden-element')).toBe(false);
+  expect(newRoundBtn.classList.contains('hidden-element')).toBe(false);
+  expect(optionsDiv.classList.contains('hidden-element')).toBe(false);
+  expect(introHeader.innerHTML).toBe(`Wow, ${winner.name} has won the game!`);
+});
+
+test('displayWinnerOrDraw displays the expected result when there\'s a draw ', () => {
+  displayWinnerOrDraw(introHeader, undefined, optionsDiv, newRoundBtn);
+  expect(introHeader.classList.contains('hidden-element')).toBe(false);
+  expect(newRoundBtn.classList.contains('hidden-element')).toBe(false);
+  expect(optionsDiv.classList.contains('hidden-element')).toBe(false);
+  expect(introHeader.innerHTML).toBe('This is a draw!');
 });
