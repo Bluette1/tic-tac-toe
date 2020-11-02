@@ -1,4 +1,4 @@
-import { produceDiagonals, produceVerticals, displayWinnerOrDraw } from '../src/helpers/gameBoardHelper';
+import { produceDiagonals, produceVerticals, displayWinnerOrDraw, displayCurrentPlayer } from '../src/helpers/gameBoardHelper';
 import { bodyContent } from './helpers/content_test_helper';
 
 const boardArr = [

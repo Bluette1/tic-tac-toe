@@ -1,6 +1,6 @@
 import Player from '../components/player';
 import GameFlow from '../components/gameFlow.js';
-import { produceDiagonals, produceVerticals, displayWinnerOrDraw } from '../helpers/gameBoardHelper';
+import { produceDiagonals, produceVerticals, displayWinnerOrDraw, displayCurrentPlayer } from '../helpers/gameBoardHelper';
 
 const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
   const allPlayers = Player('X', 'O').getAllPlayers(players);
@@ -29,11 +29,6 @@ const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
         gameBoardContainer.appendChild(boardCell);
       }
     }
-  };
-
-  const displayCurrentPlayer = (field, currentPlayer, otherPlayer) => {
-    field.classList.remove('hidden-element');
-    field.innerHTML = `${currentPlayer.name} has made a move, ${otherPlayer.name}, it's your turn!`;
   };
 
   const updateBoard = (clickEvent, currentPlayer, otherPlayer) => {

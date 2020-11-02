@@ -20,4 +20,9 @@ const displayWinnerOrDraw = (field, winner, optionsDiv, newRoundBtn) => {
   if (winner) { field.innerHTML = `Wow, ${winner.name} has won the game!`; } else { field.innerHTML = 'This is a draw!'; }
 };
 
-export { produceDiagonals, produceVerticals, displayWinnerOrDraw };
+
+const displayCurrentPlayer = (field, currentPlayer, otherPlayer) => {
+  field.classList.remove('hidden-element');
+  field.innerHTML = `${currentPlayer.name} has made a move, ${otherPlayer.name}, it's your turn!`;
+};
+export { produceDiagonals, produceVerticals, displayWinnerOrDraw, displayCurrentPlayer };
