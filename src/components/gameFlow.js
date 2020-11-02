@@ -37,10 +37,17 @@ const GameFlow = () => {
     }
     return false;
   };
-  const boardReset = () => [['', '', ''], ['', '', ''], ['', '', '']];
+  const boardReset = () => [
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', ''],
+  ];
 
   return {
-    boardReset, checkWin, checkDraw, convertBoardArrToOrdinarryArr,
+    boardReset,
+    checkWin,
+    checkDraw,
+    convertBoardArrToOrdinarryArr,
   };
 };
 

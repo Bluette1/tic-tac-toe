@@ -28,6 +28,7 @@ body {
 }
 
 .centers-h-v {
+  display: -ms-grid;
   display: grid;
   place-items: center;
 }
@@ -105,6 +106,7 @@ body {
 }
 
 .gamebord-section {
+  display: -ms-grid;
   display: grid;
   place-items: center;
 }
@@ -114,6 +116,7 @@ body {
   width: 30%;
   height: 60%;
   padding: 0;
+  display: -ms-grid;
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
 }
