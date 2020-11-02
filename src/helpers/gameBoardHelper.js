@@ -28,6 +28,31 @@ const displayCurrentPlayer = (field, currentPlayer, otherPlayer) => {
 const checkWin = (currBoard, checkGameWin) => checkGameWin(currBoard);
 
 const checkDraw = (currBoard, checkGameDraw) => checkGameDraw(currBoard);
+
+const checkWinOrDraw = (
+  winRow,
+  winDiagonal,
+  winVertical,
+  draw,
+  fieldOfWinner,
+  currentPlayer,
+  optionsDiv,
+  newRoundBtn,
+  gameBoardContainer,
+) => {
+  let windOrDraw = false;
+  if (winRow || winDiagonal || winVertical) {
+    displayWinnerOrDraw(fieldOfWinner, currentPlayer, optionsDiv, newRoundBtn);
+    gameBoardContainer.setAttribute('disabled', 'disabled');
+    windOrDraw = true;
+  }
+  if (draw) {
+    displayWinnerOrDraw(fieldOfWinner, undefined, optionsDiv, newRoundBtn);
+    gameBoardContainer.setAttribute('disabled', 'disabled');
+    windOrDraw = true;
+  }
+  return windOrDraw;
+};
 export {
   produceDiagonals,
   produceVerticals,
@@ -35,4 +60,5 @@ export {
   displayCurrentPlayer,
   checkWin,
   checkDraw,
+  checkWinOrDraw,
 };

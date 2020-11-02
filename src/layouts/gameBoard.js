@@ -3,10 +3,10 @@ import GameFlow from '../components/gameFlow.js';
 import {
   produceDiagonals,
   produceVerticals,
-  displayWinnerOrDraw,
   displayCurrentPlayer,
   checkWin,
   checkDraw,
+  checkWinOrDraw,
 } from '../helpers/gameBoardHelper';
 
 const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
@@ -38,6 +38,36 @@ const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
     }
   };
 
+  const winOrDrawDisplay = (currBoard, isPlayed, currentPlayer, otherPlayer) => {
+    const winRow = checkWin(currBoard, GameFlow.checkWin);
+    const winDiagonal = checkWin(produceDiagonals(
+      currBoard, GameFlow.convertBoardArrToOrdinarryArr,
+    ), GameFlow.checkWin);
+    const winVertical = checkWin(produceVerticals(
+      currBoard, GameFlow.convertBoardArrToOrdinarryArr,
+    ), GameFlow.checkWin);
+    const draw = checkDraw(currBoard, GameFlow.checkDraw);
+
+    if (isPlayed) {
+      displayCurrentPlayer(fieldOfWinner, currentPlayer, otherPlayer);
+    }
+    const boardReset = checkWinOrDraw(
+      winRow,
+      winDiagonal,
+      winVertical,
+      draw,
+      fieldOfWinner,
+      currentPlayer,
+      optionsDiv,
+      newRoundBtn,
+      gameBoardContainer,
+    );
+
+    if (boardReset) {
+      playersBoardArr = GameFlow.boardReset();
+    }
+  };
+
   const updateBoard = (clickEvent, currentPlayer, otherPlayer) => {
     let isPlayed;
     const { i, j } = clickEvent.target.dataset;
@@ -60,28 +90,7 @@ const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
 
     displayBoard(currBoard);
 
-    const winRow = checkWin(currBoard, GameFlow.checkWin);
-    const winDiagonal = checkWin(produceDiagonals(
-      currBoard, GameFlow.convertBoardArrToOrdinarryArr,
-    ), GameFlow.checkWin);
-    const winVertical = checkWin(produceVerticals(
-      currBoard, GameFlow.convertBoardArrToOrdinarryArr,
-    ), GameFlow.checkWin);
-    const draw = checkDraw(currBoard, GameFlow.checkDraw);
-
-    if (isPlayed) {
-      displayCurrentPlayer(fieldOfWinner, currentPlayer, otherPlayer);
-    }
-
-    if (winRow || winDiagonal || winVertical) {
-      displayWinnerOrDraw(fieldOfWinner, currentPlayer, optionsDiv, newRoundBtn);
-      gameBoardContainer.setAttribute('disabled', 'disabled');
-      playersBoardArr = GameFlow.boardReset();
-    } else if (draw) {
-      displayWinnerOrDraw(fieldOfWinner, undefined, optionsDiv, newRoundBtn);
-      gameBoardContainer.setAttribute('disabled', 'disabled');
-      playersBoardArr = GameFlow.boardReset();
-    }
+    winOrDrawDisplay(currBoard, isPlayed, currentPlayer, otherPlayer);
   };
 
   gameBoardContainer.addEventListener('mousedown', event => {

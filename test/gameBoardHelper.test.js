@@ -14,6 +14,7 @@ const boardArr = [
   ['O', 'X', 'X'],
 ];
 document.body.innerHTML = bodyContent;
+// const gameBoardContainer = document.querySelector('#gamebord-container');
 const introHeader = document.querySelector('#intro-header');
 const optionsDiv = document.querySelector('#options-div');
 const newRoundBtn = document.querySelector('#new-round-btn');
@@ -29,6 +30,7 @@ test('produceDiagonals returns the expected result', () => {
     ['X', 'O', 'O'],
   ];
   expect(actualResult).toEqual(expectedResult);
+  expect(mockConvertBoardArrToOrdinarryArr).toHaveBeenCalledWith(boardArr);
 });
 
 test('produceVerticals returns the expected result', () => {
@@ -41,6 +43,7 @@ test('produceVerticals returns the expected result', () => {
     ['X', 'O', 'X'],
   ];
   expect(actualResult).toEqual(expectedResult);
+  expect(mockConvertBoardArrToOrdinarryArr).toHaveBeenCalledWith(boardArr);
 });
 
 test('displayWinnerOrDraw displays the expected result when there\'s a winner ', () => {
@@ -70,19 +73,23 @@ test('displayCurrentPlayer displays the current player', () => {
 test('checkWin returns true if there is a winner', () => {
   const mockCheckWin = jest.fn(() => true);
   expect(checkWin(boardArr, mockCheckWin)).toBe(true);
+  expect(mockCheckWin).toHaveBeenCalledWith(boardArr);
 });
 
 test('checkWin returns false if there is no winner', () => {
   const mockCheckWin = jest.fn(() => false);
   expect(checkWin(boardArr, mockCheckWin)).toBe(false);
+  expect(mockCheckWin).toHaveBeenCalledWith(boardArr);
 });
 
 test('checkDraw returns true if there is a draw', () => {
-  const mockCheckWin = jest.fn(() => true);
-  expect(checkDraw(boardArr, mockCheckWin)).toBe(true);
+  const mockCheckDraw = jest.fn(() => true);
+  expect(checkDraw(boardArr, mockCheckDraw)).toBe(true);
+  expect(mockCheckDraw).toHaveBeenCalledWith(boardArr);
 });
 
 test('checkDraw returns false if there is no draw', () => {
-  const mockCheckWin = jest.fn(() => false);
-  expect(checkDraw(boardArr, mockCheckWin)).toBe(false);
+  const mockCheckDraw = jest.fn(() => false);
+  expect(checkDraw(boardArr, mockCheckDraw)).toBe(false);
+  expect(mockCheckDraw).toHaveBeenCalledWith(boardArr);
 });
