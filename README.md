@@ -14,7 +14,7 @@ This project was done for learning purpose, the aim was to master objects, objec
 - HTML5
 - CSS3
 - Vanilla Javascript
-
+- Webpack
 
 ## Features
 - User can start a new game
