@@ -1,5 +1,7 @@
 import Player from '../components/player';
 import GameFlow from '../components/gameFlow.js';
+import { produceDiagonals, produceVerticals } from '../helpers/gameBoardHelper';
+
 
 const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
   const allPlayers = Player('X', 'O').getAllPlayers(players);
@@ -7,21 +9,6 @@ const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
   let playersBoardArr = GameFlow.boardReset();
   const copyOfBoard = (passedBoardArr) => passedBoardArr.map(arr => arr.slice());
   let currBoard = copyOfBoard(playersBoardArr);
-
-  const produceDiagonals = boardArr => {
-    const ordinaryArr = GameFlow.convertBoardArrToOrdinarryArr(boardArr);
-    const forwardDiagonal = [ordinaryArr[0], ordinaryArr[4], ordinaryArr[8]];
-    const antDiagonal = [ordinaryArr[2], ordinaryArr[4], ordinaryArr[6]];
-    return [forwardDiagonal, antDiagonal];
-  };
-
-  const produceVerticals = boardArr => {
-    const ordinaryArr = GameFlow.convertBoardArrToOrdinarryArr(boardArr);
-    const leftVertical = [ordinaryArr[0], ordinaryArr[3], ordinaryArr[6]];
-    const middleVertical = [ordinaryArr[1], ordinaryArr[4], ordinaryArr[7]];
-    const rightVertical = [ordinaryArr[2], ordinaryArr[5], ordinaryArr[8]];
-    return [leftVertical, middleVertical, rightVertical];
-  };
 
   const displayBoard = (board = playersBoardArr) => {
     gameBoardContainer.innerHTML = '';
@@ -78,9 +65,14 @@ const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
     }
 
     displayBoard(currBoard);
+
     const winRow = GameFlow.checkWin(currBoard);
-    const winDiagonal = GameFlow.checkWin(produceDiagonals(currBoard));
-    const winVertical = GameFlow.checkWin(produceVerticals(currBoard));
+    const winDiagonal = GameFlow.checkWin(produceDiagonals(
+      currBoard, GameFlow.convertBoardArrToOrdinarryArr
+    ));
+    const winVertical = GameFlow.checkWin(produceVerticals(
+      currBoard, GameFlow.convertBoardArrToOrdinarryArr
+    ));
     const draw = GameFlow.checkDraw(currBoard);
     if (isPlayed) {
       displayCurrentPlayer(fieldOfWinner, currentPlayer, otherPlayer);
