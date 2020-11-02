@@ -4,7 +4,7 @@ import {
   displayWinnerOrDraw,
   displayCurrentPlayer,
   checkWin,
-  checkDraw
+  checkDraw,
 } from '../src/helpers/gameBoardHelper';
 import { bodyContent } from './helpers/content_test_helper';
 
@@ -69,20 +69,20 @@ test('displayCurrentPlayer displays the current player', () => {
 
 test('checkWin returns true if there is a winner', () => {
   const mockCheckWin = jest.fn(() => true);
-  expect(checkWin(boardArr, mockCheckWin)).toBe(true)
+  expect(checkWin(boardArr, mockCheckWin)).toBe(true);
 });
 
 test('checkWin returns false if there is no winner', () => {
   const mockCheckWin = jest.fn(() => false);
-  expect(checkWin(boardArr, mockCheckWin)).toBe(false)
+  expect(checkWin(boardArr, mockCheckWin)).toBe(false);
 });
 
 test('checkDraw returns true if there is a draw', () => {
   const mockCheckWin = jest.fn(() => true);
-  expect(checkDraw(boardArr, mockCheckWin)).toBe(true)
+  expect(checkDraw(boardArr, mockCheckWin)).toBe(true);
 });
 
 test('checkDraw returns false if there is no draw', () => {
   const mockCheckWin = jest.fn(() => false);
-  expect(checkDraw(boardArr, mockCheckWin)).toBe(false)
+  expect(checkDraw(boardArr, mockCheckWin)).toBe(false);
 });

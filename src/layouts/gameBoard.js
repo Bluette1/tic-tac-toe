@@ -6,7 +6,7 @@ import {
   displayWinnerOrDraw,
   displayCurrentPlayer,
   checkWin,
-  checkDraw
+  checkDraw,
 } from '../helpers/gameBoardHelper';
 
 const Board = (players, fieldOfWinner, optionsDiv, newRoundBtn) => {
