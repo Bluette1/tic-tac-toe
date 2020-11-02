@@ -10,4 +10,4 @@ app.get('/', (request, response) => {
   response.sendFile(`${__dirname}/dist/index.html`);
 });
 
-app.listen(PORT, error => (error));
+app.listen(PORT);
