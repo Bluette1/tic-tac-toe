@@ -5,6 +5,7 @@ import {
   displayCurrentPlayer,
   checkWin,
   checkDraw,
+  checkWinOrDraw,
 } from '../src/helpers/gameBoardHelper';
 import { bodyContent } from './helpers/content_test_helper';
 
@@ -14,12 +15,14 @@ const boardArr = [
   ['O', 'X', 'X'],
 ];
 document.body.innerHTML = bodyContent;
-// const gameBoardContainer = document.querySelector('#gamebord-container');
+const gameBoardContainer = document.querySelector('#gamebord-container');
 const introHeader = document.querySelector('#intro-header');
 const optionsDiv = document.querySelector('#options-div');
 const newRoundBtn = document.querySelector('#new-round-btn');
+const players = [{ name: 'Mary', mark: 'X' }, { name: 'Jane', mark: 'O' }];
 optionsDiv.classList.add('hidden-element');
 introHeader.classList.add('hidden-element');
+gameBoardContainer.setAttribute('disabled', false);
 
 test('produceDiagonals returns the expected result', () => {
   const mockConvertBoardArrToOrdinarryArr = jest.fn(() => ['X', 'O', 'X', 'O', 'O', 'O', 'O', 'X', 'X']);
@@ -64,7 +67,6 @@ test('displayWinnerOrDraw displays the expected result when there\'s a draw ', (
 });
 
 test('displayCurrentPlayer displays the current player', () => {
-  const players = [{ name: 'Mary', mark: 'X' }, { name: 'Jane', mark: 'O' }];
   displayCurrentPlayer(introHeader, players[0], players[1]);
   expect(introHeader.classList.contains('hidden-element')).toBe(false);
   expect(introHeader.innerHTML).toBe(`${players[0].name} has made a move, ${players[1].name}, it's your turn!`);
@@ -92,4 +94,93 @@ test('checkDraw returns false if there is no draw', () => {
   const mockCheckDraw = jest.fn(() => false);
   expect(checkDraw(boardArr, mockCheckDraw)).toBe(false);
   expect(mockCheckDraw).toHaveBeenCalledWith(boardArr);
+});
+
+test('checkWinOrDraw returns true if there is a winner: row', () => {
+  const actualResult = checkWinOrDraw(
+    true,
+    false,
+    false,
+    false,
+    introHeader,
+    players[0],
+    optionsDiv,
+    newRoundBtn,
+    gameBoardContainer,
+  );
+
+  expect(actualResult).toBe(true);
+  expect(gameBoardContainer.getAttribute('disabled')).toEqual('disabled');
+});
+
+test('checkWinOrDraw returns true if there is a winner: vertical', () => {
+  gameBoardContainer.setAttribute('disabled', false);
+  const actualResult = checkWinOrDraw(
+    false,
+    false,
+    true,
+    false,
+    introHeader,
+    players[0],
+    optionsDiv,
+    newRoundBtn,
+    gameBoardContainer,
+  );
+
+  expect(actualResult).toBe(true);
+  expect(gameBoardContainer.getAttribute('disabled')).toEqual('disabled');
+});
+
+test('checkWinOrDraw returns true if there is a winner: diagonal', () => {
+  gameBoardContainer.setAttribute('disabled', false);
+  const actualResult = checkWinOrDraw(
+    false,
+    true,
+    false,
+    false,
+    introHeader,
+    players[0],
+    optionsDiv,
+    newRoundBtn,
+    gameBoardContainer,
+  );
+
+  expect(actualResult).toBe(true);
+  expect(gameBoardContainer.getAttribute('disabled')).toEqual('disabled');
+});
+
+test('checkWinOrDraw returns true if there is a draw', () => {
+  gameBoardContainer.setAttribute('disabled', false);
+  const actualResult = checkWinOrDraw(
+    false,
+    false,
+    false,
+    true,
+    introHeader,
+    players[0],
+    optionsDiv,
+    newRoundBtn,
+    gameBoardContainer,
+  );
+
+  expect(actualResult).toBe(true);
+  expect(gameBoardContainer.getAttribute('disabled')).toEqual('disabled');
+});
+
+test('checkWinOrDraw returns false if there is no win or draw', () => {
+  gameBoardContainer.setAttribute('disabled', false);
+  const actualResult = checkWinOrDraw(
+    false,
+    false,
+    false,
+    false,
+    introHeader,
+    players[0],
+    optionsDiv,
+    newRoundBtn,
+    gameBoardContainer,
+  );
+
+  expect(actualResult).toBe(false);
+  expect(gameBoardContainer.getAttribute('disabled')).toEqual('false');
 });
