@@ -52,3 +52,11 @@ test('displayWinnerOrDraw displays the expected result when there\'s a draw ', (
   expect(optionsDiv.classList.contains('hidden-element')).toBe(false);
   expect(introHeader.innerHTML).toBe('This is a draw!');
 });
+
+
+test('displayCurrentPlayer displays the current player', () => {
+  const players = [{ name: 'Mary', mark: 'X' }, { name: 'Jane', mark: 'O' }]
+  displayCurrentPlayer(introHeader, players[0], players[1]);
+  expect(introHeader.classList.contains('hidden-element')).toBe(false);
+  expect(introHeader.innerHTML).toBe(`${players[0].name} has made a move, ${players[1].name}, it's your turn!`);
+});
