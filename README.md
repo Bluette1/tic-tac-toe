@@ -31,7 +31,7 @@ This project was done for learning purpose, the aim was to master objects, objec
 - Run `git clone https://github.com/bluette1/tic-tac-toe && cd tic-tac-toe` to get a copy of source codes on your local computer and to navigate inside the project directory
 
 ### Usage
-- Run `yarn install` to install dependencies
+- Run `yarn` to install dependencies
 
 - Run `yarn dev` to run this app in development environment or `yarn start` to run this project in production environment
 
